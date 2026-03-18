@@ -18,6 +18,7 @@ from sklearn.ensemble import RandomForestRegressor
 # ======================================
 
 st.title("AI Job Market Skill Analyzer")
+st.caption("Analyze job market trends, skill demand, and salary insights using ML")
 
 # ======================================
 # STEP 1: GENERATE JOB DATA
