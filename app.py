@@ -18,6 +18,8 @@ from sklearn.ensemble import RandomForestRegressor
 # ======================================
 
 st.title("AI Job Market Skill Analyzer")
+st.metric("Total Jobs", len(df))
+st.metric("Average Salary", int(df["salary"].mean()))
 
 
 # ======================================
@@ -229,3 +231,8 @@ if user_question:
     response = chatbot(user_question)
 
     st.write(response)
+if "skill" in q:
+    return f"Top 5 skills: {skill_counts.most_common(5)}"
+
+elif "learn" in q:
+    return "Focus on Python, SQL, Machine Learning, and AWS."
