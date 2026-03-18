@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 from sklearn.preprocessing import MultiLabelBinarizer
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestRegressor
-import numpy np
+import numpy as np
 
 
 # ======================================
