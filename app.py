@@ -18,9 +18,6 @@ from sklearn.ensemble import RandomForestRegressor
 # ======================================
 
 st.title("AI Job Market Skill Analyzer")
-st.metric("Total Jobs", len(df))
-st.metric("Average Salary", int(df["salary"].mean()))
-
 
 # ======================================
 # STEP 1: GENERATE JOB DATA
@@ -55,6 +52,11 @@ for i in range(200):
     })
 
 df = pd.DataFrame(data)
+
+col1, col2 = st.columns(2)
+
+col1.metric("Total Jobs", len(df))
+col2.metric("Average Salary", int(df["salary"].mean()))
 
 
 # ======================================
