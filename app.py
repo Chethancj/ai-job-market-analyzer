@@ -120,6 +120,14 @@ model = RandomForestRegressor()
 
 model.fit(X_train,y_train)
 
+from sklearn.metrics import mean_absolute_error
+
+pred = model.predict(X_test)
+
+error = mean_absolute_error(y_test, pred)
+
+st.write(f"Model MAE: £{int(error)}")
+
 # ======================================
 # STEP 4: SKILL DEMAND ANALYSIS
 # ======================================
