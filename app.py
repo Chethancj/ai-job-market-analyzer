@@ -95,6 +95,30 @@ def extract_skills(text):
 
 df["skills"] = df["job_description"].apply(extract_skills)
 
+# ======================================
+# MACHINE LEARNING MODEL
+# ======================================
+
+mlb = MultiLabelBinarizer()
+
+skill_matrix = mlb.fit_transform(df["skills"])
+
+skills_encoded = pd.DataFrame(skill_matrix,
+                              columns=mlb.classes_)
+
+model_df = pd.concat([skills_encoded, df["salary"]],axis=1)
+
+X = model_df.drop("salary",axis=1)
+
+y = model_df["salary"]
+
+X_train,X_test,y_train,y_test = train_test_split(
+    X,y,test_size=0.2,random_state=42
+)
+
+model = RandomForestRegressor()
+
+model.fit(X_train,y_train)
 
 # ======================================
 # STEP 4: SKILL DEMAND ANALYSIS
@@ -131,31 +155,6 @@ st.header("Sample Job Postings")
 
 st.dataframe(df.head())
 
-
-# ======================================
-# MACHINE LEARNING MODEL
-# ======================================
-
-mlb = MultiLabelBinarizer()
-
-skill_matrix = mlb.fit_transform(df["skills"])
-
-skills_encoded = pd.DataFrame(skill_matrix,
-                              columns=mlb.classes_)
-
-model_df = pd.concat([skills_encoded, df["salary"]],axis=1)
-
-X = model_df.drop("salary",axis=1)
-
-y = model_df["salary"]
-
-X_train,X_test,y_train,y_test = train_test_split(
-    X,y,test_size=0.2,random_state=42
-)
-
-model = RandomForestRegressor()
-
-model.fit(X_train,y_train)
 
 
 # ======================================
