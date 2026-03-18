@@ -198,41 +198,21 @@ st.header("AI Career Advisor")
 user_question = st.text_input("Ask a career question")
 
 
-def chatbot(question):
+def chatbot(q):
+    q = q.lower()
 
-    question = question.lower()
+    if "skill" in q:
+        return f"Top 5 skills are: {skill_counts.most_common(5)}"
 
-    if "skill" in question:
+    elif "salary" in q:
+        avg = int(df['salary'].mean())
+        return f"The average salary is around £{avg}"
 
-        top_skills = skill_counts.most_common(3)
+    elif "learn" in q:
+        return "You should focus on Python, SQL, Machine Learning, and AWS."
 
-        return f"Top demanded skills are {top_skills}"
-
-
-    elif "salary" in question:
-
-        avg_salary = int(df["salary"].mean())
-
-        return f"The average salary in this dataset is £{avg_salary}"
-
-
-    elif "job" in question:
-
-        return "Popular roles include Data Scientist, ML Engineer, and Data Analyst"
-
+    elif "job" in q:
+        return "Common roles include Data Scientist, ML Engineer, and Data Analyst."
 
     else:
-
-        return "Try asking about skills, salary, or job roles."
-
-
-if user_question:
-
-    response = chatbot(user_question)
-
-    st.write(response)
-if "skill" in q:
-    return f"Top 5 skills: {skill_counts.most_common(5)}"
-
-elif "learn" in q:
-    return "Focus on Python, SQL, Machine Learning, and AWS."
+        return "Try asking about skills, salary, jobs, or what to learn."
